@@ -6,13 +6,15 @@ import org.osgi.service.event.EventHandler;
 public class MyEventHandler implements EventHandler{
 	@Override
 	public void handleEvent(Event event) {
-		System.out.println("handle event started--"+event);
+		System.out.println("consumer handle event started--"+event.toString());
+		//sleep 5 seconds to test post event
 		try {
-			Thread.currentThread().sleep(5*1000);
+			Thread.currentThread();
+			Thread.sleep(5*1000);
 		} 
 		catch (InterruptedException e) {
-			System.out.println("Exception happen:\n"+e.getMessage());
+			System.out.println("Exception happen in consumer handle event:\n"+e.getMessage());
 		}
-		System.out.println("handle event ok--"+event);
+		System.out.println("consumer handle event ok--"+event.toString());
 	}
 }

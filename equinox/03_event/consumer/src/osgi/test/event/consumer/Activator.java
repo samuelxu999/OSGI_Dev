@@ -11,10 +11,6 @@ import osgi.test.event.testevent.MyEvent;
 import osgi.test.event.iface.IService;
 import osgi.test.event.consumer.MyEventHandler;
 
-//import helloworld.event.MyEvent;
-//import helloworld.service.IHello;
-//import osgi.test.helloworld2.MyEventHandler;
-
 public class Activator implements BundleActivator {
 
 	private static BundleContext context;
@@ -29,22 +25,22 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
-		System.out.println("event consumer, started!");
+		System.out.println("event consumer: started!");
 		
-		/*test event handle*/
+		/*************************test event handle*******************************/
 		String[] topics = new String[] {MyEvent.MY_TOPIC};		
 		Hashtable<String,String[]> ht = new Hashtable<String,String[]>();
 		ht.put(EventConstants.EVENT_TOPIC, topics);
-		//String[] ttt= new String[] {"RRRRR"};
+		
 		//System.out.printf("%s\n",topics);
 		EventHandler myHandler = new MyEventHandler();
 		context.registerService(EventHandler.class.getName(), myHandler, ht);
-		System.out.println("event handler registered");
+		System.out.println("consumer event handler registered.");
 		/**
-		* Test hello service from bundle1.
+		* Test service from provider.
 		*/
-		IService hello = (IService) context.getService(context.getServiceReference(IService.class.getName()));
-		System.out.println(hello.getService());
+		IService testserv = (IService) context.getService(context.getServiceReference(IService.class.getName()));
+		System.out.println(testserv.getService());
 	}
 
 	/*
@@ -53,7 +49,7 @@ public class Activator implements BundleActivator {
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
-		System.out.println("event consumer, stopped!");
+		System.out.println("event consumer: stopped!");
 	}
 
 }

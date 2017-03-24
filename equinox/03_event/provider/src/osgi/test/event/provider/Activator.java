@@ -20,7 +20,7 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
-		System.out.println("event provider, started!");
+		System.out.println("event provider: started!");
 		/*register service interface*/
 		context.registerService(IService.class.getName(), new DefaultServiceHandler(), null);
 	}
@@ -31,7 +31,7 @@ public class Activator implements BundleActivator {
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
-		System.out.println("event provider, stopped!");
+		System.out.println("event provider: stopped!");
 		
 	}
 

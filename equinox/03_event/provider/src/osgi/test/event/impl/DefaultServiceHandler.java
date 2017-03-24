@@ -6,24 +6,32 @@ import org.osgi.service.event.EventAdmin;
 
 
 import osgi.test.event.provider.Activator;
-import osgi.test.event.testevent.MyEvent;
-//import osgi.test.event.impl;
+import osgi.test.event.testevent.*;
 import osgi.test.event.iface.IService;
 
 public class DefaultServiceHandler implements IService{
 	BundleContext context=Activator.getContext();
-	EventAdmin eventAdmin;
+	EventAdmin eventAdmin_post;
+	EventAdmin eventAdmin_send;
 	public String getService() {
-		//post a event
-		ServiceReference ref = context.getServiceReference(EventAdmin.class.getName());
+		//get registered service
+		ServiceReference<?> ref = context.getServiceReference(EventAdmin.class.getName());
 		if(ref!=null) {
-			eventAdmin = (EventAdmin)context.getService(ref);
-			if(eventAdmin!=null) {
-				System.out.println("post event started");
-				eventAdmin.postEvent(new MyEvent());
-				System.out.println("post event returned");
+			eventAdmin_post = (EventAdmin)context.getService(ref);
+			if(eventAdmin_post!=null) {
+				System.out.println("provider post event: started.");
+				/*Asynchronous event delivery is initiated by the postEvent method*/
+				eventAdmin_post.postEvent(new MyEvent("0",null));
+				System.out.println("provider post event: returned.");
+			}
+			eventAdmin_send = (EventAdmin)context.getService(ref);
+			if(eventAdmin_send!=null) {
+				System.out.println("provider send event: started.");				
+				/*Synchronous event delivery is initiated by the sendEvent method*/
+				eventAdmin_send.sendEvent(new MyEvent("1",null));
+				System.out.println("provider send event: returned.");
 			}
 		}
-		return "Hello osgi,service";
+		return "Welcome to osgi service from provider!";
 	}
 }
