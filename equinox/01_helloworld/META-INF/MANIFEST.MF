@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: 01_helloworld
-Bundle-SymbolicName: 01_helloworld
+Bundle-SymbolicName: osgi_test.helloworld
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: helloworld.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
