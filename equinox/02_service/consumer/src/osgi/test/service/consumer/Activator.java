@@ -20,7 +20,7 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
 		System.out.println("service consumer, started!");
-		//context.registerService(IService.class.getName(), new DefaultServiceImpl(), null);
+		
 		/*test hello world from exported bundle*/
 		IService serv =(IService)context.getService(context.getServiceReference(IService.class.getName()));
 		System.out.println(serv.getService());
